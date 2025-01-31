@@ -25,6 +25,9 @@ function resetValue(){
     grayscale.value = '0';
     hueRotate.value = '0';
 
+    // إعادة رسم الصورة الأصلية على الـ canvas بدون فلاتر
+    ctx.filter = "none";
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 }
 
 window.onload= function(){
@@ -32,7 +35,6 @@ window.onload= function(){
     reset.style.display= 'none';
     imgbox.style.display= 'none';
 }
-
 
 Upload.onchange = function(){
     resetValue();
@@ -50,7 +52,6 @@ Upload.onchange = function(){
         ctx.drawImage(img,0,0,canvas.width, canvas.height);
         img.style.display='none';
     }
-    
 }
 
 let filters = document.querySelectorAll("ul li input");
@@ -64,16 +65,15 @@ filters.forEach(filter =>{
         grayscale(${grayscale.value})
         blur(${blur.value}px)
         hue-rotate(${hueRotate.value}deg)
-        
         `
         ctx.drawImage(img,0,0,canvas.width, canvas.height);
-
     })
 })
 
 download.onclick = function(){
-    download.href = canvas.toDataURL('image/jpeg')
+    download.href = canvas.toDataURL('image/jpeg');
 }
+
 
 
 // saturate.addEventListener("input", function(){
